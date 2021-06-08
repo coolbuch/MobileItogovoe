@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geocoding Service</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" type="text/css" href="../static/style.css" />
+
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCazVqGNN7ImuI67Ja2LHS--bIKE1buG8U&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+  </body>
+   <script>
+          function initMap() {
+          let arr = {{markers | tojson}}
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 10,
+        center: { lat:52.3 , lng: 104.1 },
+      });
+
+      for (let element of arr)
+      {
+         pos = {lat: element[1] , lng: element[2]};
+         console.log(arr);
+         console.log(pos);
+         label = element[0];
+         marker = new google.maps.Marker({
+            position: pos,
+            map: map,
+            label: label
+      });
+        marker.setMap(map)
+      }
+
+    }
+
+    function geocodeAddress(geocoder, resultsMap) {
+      const address = document.getElementById("address").value;
+      geocoder.geocode({ address: address }, (results, status) => {
+        if (status === "OK") {
+          resultsMap.setCenter(results[0].geometry.location);
+          new google.maps.Marker({
+            map: resultsMap,
+            position: results[0].geometry.location,
+          });
+        }
+      });
+    }
+    </script>
+</html>

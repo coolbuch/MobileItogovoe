@@ -1,0 +1,18 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geocoding Service</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" type="text/css" href="../static/style.css" />
+  </head>
+  <body>
+    <h1>Scan this QR code in application to access</h1>
+    <div src="../static/qrimg.png" class = "qr_img"> </div>>
+    <h1>Or enter your Application ID, if you have already registered</h1>
+    <form style="width: 300px; margin: 0 auto;" method="post" action="/enter/">
+      <input type="text" name="uuid_field">
+      <button type="submit">Отправить</button>
+    </form>
+  </body>
+</html>
